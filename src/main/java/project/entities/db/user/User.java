@@ -1,9 +1,6 @@
-package project.entities.user;
+package project.entities.db.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +9,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "user")
 public class User {
@@ -26,12 +24,6 @@ public class User {
     @Column(name = "hash_password")
     private String hashPassword;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
     @Column(name = "email")
     private String email;
 
@@ -40,9 +32,13 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private UserRole userRole;
+    private UserRole role;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private UserStatus status;
+
+    public User(int id) {
+        this.id = id;
+    }
 }

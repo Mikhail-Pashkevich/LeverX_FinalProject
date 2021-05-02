@@ -1,4 +1,4 @@
-package project.entities;
+package project.entities.db;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

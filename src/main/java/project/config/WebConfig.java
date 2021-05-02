@@ -15,15 +15,19 @@ public class WebConfig {
     @Bean
     public ViewResolver getViewResolver() {
         FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
+
         resolver.setSuffix(".ftl");
         resolver.setPrefix("");
+
         return resolver;
     }
 
     @Bean
     public FreeMarkerConfigurer getFreeMarkerConfigurer() {
         FreeMarkerConfigurer config = new FreeMarkerConfigurer();
+
         config.setTemplateLoaderPaths("/", "/WEB-INF/views/");
+
         return config;
     }
 }

@@ -1,9 +1,10 @@
-package project.entities;
+package project.entities.db;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import project.entities.db.user.User;
 
 import javax.persistence.*;
 
@@ -19,11 +20,13 @@ public class Lot {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "trader_id")
-    private int traderId;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "trader_id")
+    private User trader;
 
-    @Column(name = "game_id")
-    private int gameId;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "game_id")
+    private Game game;
 
     @Column(name = "cost")
     private double cost;
