@@ -19,8 +19,6 @@
     <br>
     status: ${comment.status}
     <br>
-<#--    <a href="../editComment/${user.id}/${comment.id}">update</a>     <a-->
-<#--        href="../deleteComment/${user.id}/${comment.id}">delete</a>-->
     <form action=" ../editComment/${user.id}/${comment.id}">
         <button>edit</button>
     </form>

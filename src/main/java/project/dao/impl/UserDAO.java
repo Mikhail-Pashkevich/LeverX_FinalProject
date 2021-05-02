@@ -3,9 +3,9 @@ package project.dao.impl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import project.dao.DAO;
-import project.entities.db.user.User;
-import project.entities.db.user.UserRole;
-import project.entities.db.user.UserStatus;
+import project.entities.user.User;
+import project.entities.user.UserRole;
+import project.entities.user.UserStatus;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class UserDAO implements DAO<User, Integer> {
 
     @Override
     public void create(User user) {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
             session.beginTransaction();
 
             session.save(user);
@@ -30,7 +30,7 @@ public class UserDAO implements DAO<User, Integer> {
 
     @Override
     public User read(Integer id) {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
             User result = session.get(User.class, id);
 
             return result != null ? result : new User();
@@ -39,13 +39,13 @@ public class UserDAO implements DAO<User, Integer> {
 
     @Override
     public List<User> readAll() {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
             return session.createQuery("from User", User.class).list();
         }
     }
 
     public User readByLogin(String login) {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
 
             List<User> users = session.createQuery("from User where login = :login", User.class)
                     .setParameter("login", login)
@@ -56,7 +56,7 @@ public class UserDAO implements DAO<User, Integer> {
     }
 
     public List<User> readByStatus(UserStatus status) {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
 
             return session.createQuery("from User where status = :status", User.class)
                     .setParameter("status", status.toString())
@@ -65,7 +65,7 @@ public class UserDAO implements DAO<User, Integer> {
     }
 
     public List<User> readByUserRole(UserRole role) {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
 
             return session.createQuery("from User where role = :role", User.class)
                     .setParameter("role", role.toString())

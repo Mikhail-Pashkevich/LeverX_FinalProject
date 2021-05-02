@@ -1,10 +1,10 @@
-package project.entities.db;
+package project.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import project.entities.db.user.User;
+import project.entities.user.User;
 
 import javax.persistence.*;
 

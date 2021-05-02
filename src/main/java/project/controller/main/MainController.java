@@ -10,33 +10,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import project.dao.impl.CommentDAO;
 import project.dao.impl.UserDAO;
-import project.entities.db.comment.Comment;
-import project.entities.db.user.User;
+import project.entities.comment.Comment;
+import project.entities.user.User;
 
 import static java.time.LocalDateTime.now;
-import static project.entities.db.comment.CommentStatus.APPROVED;
-import static project.entities.db.comment.CommentStatus.DECLINED;
-import static project.entities.db.user.UserRole.TRADER;
+import static project.entities.comment.CommentStatus.APPROVED;
+import static project.entities.comment.CommentStatus.DECLINED;
+import static project.entities.user.UserRole.TRADER;
 import static project.util.HibernateUtil.getSessionFactory;
 
-//
-//@Slf4j
+
 @Configuration
 @RequestMapping("/main")
 public class MainController {
-    //private static Logger log = LoggerFactory.getLogger(MainController.class);
-
+    private final UserDAO userDAO = new UserDAO(getSessionFactory());
+    private final CommentDAO commentDAO = new CommentDAO(getSessionFactory());
 
     @GetMapping("/addComment/{traderId}")
     public String addComment(@PathVariable("traderId") int traderId, Model model) {
-        //model.addAttribute("traderId", traderId);
         return "main/addComment";
     }
 
     @PostMapping("/addComment/{traderId}")
     public String addComment(@ModelAttribute("message") String message,
                              @PathVariable("traderId") int traderId) {
-        new CommentDAO(getSessionFactory()).create(
+        commentDAO.create(
                 Comment.builder()
                         .message(message)
                         .trader(new User(traderId))
@@ -51,13 +49,13 @@ public class MainController {
 
     @GetMapping("/commentList")
     public String commentList(Model model) {
-        model.addAttribute("comments", new CommentDAO(getSessionFactory()).readByStatus(APPROVED));
+        model.addAttribute("comments", commentDAO.readByStatus(APPROVED));
         return "main/commentList";
     }
 
     @GetMapping("/traderList")
     public String traderList(Model model) {
-        model.addAttribute("traders", new UserDAO(getSessionFactory()).readByUserRole(TRADER));
+        model.addAttribute("traders", userDAO.readByUserRole(TRADER));
         return "main/traderList";
     }
 }

@@ -1,7 +1,7 @@
-package project.entities.db.comment;
+package project.entities.comment;
 
 import lombok.*;
-import project.entities.db.user.User;
+import project.entities.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

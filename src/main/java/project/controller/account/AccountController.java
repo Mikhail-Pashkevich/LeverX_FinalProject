@@ -6,17 +6,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import project.dao.impl.UserDAO;
-import project.entities.db.user.User;
+import project.entities.user.User;
 
 import static java.time.LocalDateTime.now;
 import static org.springframework.security.crypto.bcrypt.BCrypt.*;
-import static project.entities.db.user.UserRole.USER;
-import static project.entities.db.user.UserStatus.CREATED;
+import static project.entities.user.UserRole.USER;
+import static project.entities.user.UserStatus.CREATED;
 import static project.util.HibernateUtil.getSessionFactory;
 
 @Configuration
 @RequestMapping("/account")
 public class AccountController {
+    private final UserDAO userDAO = new UserDAO(getSessionFactory());
+
     @GetMapping("/signIn")
     public String signIn() {
         return "account/signIn";
@@ -35,15 +37,13 @@ public class AccountController {
     @PostMapping("/signIn")
     public String signIn(@ModelAttribute("login") String login,
                          @ModelAttribute("password") String password) {
-        UserDAO userDAO = new UserDAO(getSessionFactory());
-
         User user = userDAO.readByLogin(login);
 
         if (!user.getHashPassword().isEmpty() && checkpw(password, user.getHashPassword())) {
             return switch (user.getRole()) {
-                case USER -> "redirect:/user/userHome/"+user.getId();
-                case ADMIN -> "redirect:/admin/adminHome/"+user.getId();
-                case TRADER -> "redirect:/trader/traderHome/"+user.getId();
+                case USER -> "redirect:/user/userHome/" + user.getId();
+                case ADMIN -> "redirect:/admin/adminHome/" + user.getId();
+                case TRADER -> "redirect:/trader/traderHome/" + user.getId();
                 default -> "/";
             };
         }
@@ -64,7 +64,7 @@ public class AccountController {
                 .status(CREATED)
                 .build();
 
-        new UserDAO(getSessionFactory()).create(user);
+        userDAO.create(user);
 
         return "redirect:/account/signIn";
     }

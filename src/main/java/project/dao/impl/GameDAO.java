@@ -3,7 +3,7 @@ package project.dao.impl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import project.dao.DAO;
-import project.entities.db.Game;
+import project.entities.Game;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class GameDAO implements DAO<Game, Integer> {
 
     @Override
     public void create(Game game) {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
             session.beginTransaction();
 
             session.save(game);
@@ -27,7 +27,7 @@ public class GameDAO implements DAO<Game, Integer> {
 
     @Override
     public Game read(Integer id) {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
             Game result = session.get(Game.class, id);
 
             return result != null ? result : new Game();
@@ -35,7 +35,7 @@ public class GameDAO implements DAO<Game, Integer> {
     }
 
     public Game readByName(String name) {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
 
             List<Game> users = session.createQuery("from Game where name = :name", Game.class)
                     .setParameter("name", name)
@@ -47,7 +47,7 @@ public class GameDAO implements DAO<Game, Integer> {
 
     @Override
     public List<Game> readAll() {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
             return session.createQuery("from Game", Game.class).list();
         }
     }

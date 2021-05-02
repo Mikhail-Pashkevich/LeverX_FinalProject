@@ -1,6 +1,4 @@
-import project.dao.impl.CommentDAO;
 import project.dao.impl.UserDAO;
-import project.entities.db.comment.Comment;
 import project.entities.db.user.User;
 import project.entities.db.user.UserRole;
 

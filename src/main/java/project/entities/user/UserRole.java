@@ -1,4 +1,4 @@
-package project.entities.db.user;
+package project.entities.user;
 
 public enum UserRole {
     USER, ADMIN, TRADER, ANONYMOUS

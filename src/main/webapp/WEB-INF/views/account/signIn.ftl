@@ -7,27 +7,27 @@
 </head>
 
 <body>
-    <form action="/" align="right">
-        <button>Home</button>
-    </form>
+<form action="/" align="right">
+    <button>Home</button>
+</form>
 
-    <form method="post" style="margin-top:200px">
-        <p align="center">
-            <input type="text" size="40" placeholder="Login" name ="login"required>
-        </p>
+<form method="post" style="margin-top:200px">
+    <p align="center">
+        <input type="text" size="40" placeholder="Login" name="login" required>
+    </p>
 
-        <p align="center">
-            <input type="password" size="40" placeholder="Password" name ="password"required>
-        </p>
+    <p align="center">
+        <input type="password" size="40" placeholder="Password" name="password" required>
+    </p>
 
-        <p align="center">
-            <input type="submit" value="Sign In">
-        </p>
-    </form>
+    <p align="center">
+        <input type="submit" value="Sign In">
+    </p>
+</form>
 
-    <form action="signUp" align="center">
-        <button>Sign Up</button>
-    </form>
+<form action="signUp" align="center">
+    <button>Sign Up</button>
+</form>
 </body>
 
 </html>

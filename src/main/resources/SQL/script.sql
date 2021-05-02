@@ -1,6 +1,8 @@
-create database LeverXProject;
+create
+database LeverXProject;
 
-use LeverXProject;
+use
+LeverXProject;
 
 create table user
 (

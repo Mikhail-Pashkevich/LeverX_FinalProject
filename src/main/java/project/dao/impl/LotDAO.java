@@ -3,8 +3,7 @@ package project.dao.impl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import project.dao.DAO;
-import project.entities.db.Lot;
-import project.entities.db.user.User;
+import project.entities.Lot;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class LotDAO implements DAO<Lot, Integer> {
 
     @Override
     public void create(Lot lot) {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
             session.beginTransaction();
 
             session.save(lot);
@@ -28,7 +27,7 @@ public class LotDAO implements DAO<Lot, Integer> {
 
     @Override
     public Lot read(Integer id) {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
             Lot result = session.get(Lot.class, id);
 
             return result != null ? result : new Lot();
@@ -37,13 +36,13 @@ public class LotDAO implements DAO<Lot, Integer> {
 
     @Override
     public List<Lot> readAll() {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
             return session.createQuery("from Lot", Lot.class).list();
         }
     }
 
     public List<Lot> readByTraderId(int traderId) {
-        try ( Session session = factory.openSession()) {
+        try (Session session = factory.openSession()) {
 
             return session.createQuery("from Lot where trader.id = :traderId", Lot.class)
                     .setParameter("traderId", traderId)

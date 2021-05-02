@@ -23,10 +23,10 @@
         <property name="show_sql">true</property>
 
         <!-- Mapping files -->
-        <mapping class="project.entities.db.Game"/>
-        <mapping class="project.entities.db.Lot"/>
-        <mapping class="project.entities.db.comment.Comment"/>
-        <mapping class="project.entities.db.user.User"/>
+        <mapping class="project.entities.Game"/>
+        <mapping class="project.entities.Lot"/>
+        <mapping class="project.entities.comment.Comment"/>
+        <mapping class="project.entities.user.User"/>
 
     </session-factory>
 

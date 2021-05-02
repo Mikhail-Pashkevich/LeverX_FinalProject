@@ -9,9 +9,8 @@
 <form action="/" align="right">
     <button>Home</button>
 </form>
-<form  method="post">
+<form method="post">
     <input type="text" size="100" placeholder="your message" name="message">
-<#--    <input type="hidden" value="${traderId}" name ="traderId">-->
     <input type="submit" value="add">
 </form>
 </body>
